@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation, useParams } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation, useParams, createCookieSessionStorage } from "react-router-dom";
 
 import MainLayout from "../layouts/mainLayout";
 
@@ -21,14 +21,17 @@ function DynamicLayout({ children }) {
 
     return <MainLayout channelType={channelType}>{children}</MainLayout>;
 }
+function PrivateRouter() {}
 export default function App() {
     return (
         <Router>
             <DynamicLayout>
-                <React.Suspense fallback={<div>Loading...</div>}>
+                <React.Suspense allback={<div>Loading...</div>}>
                     <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/login" element={<LoginPage />} />
+                        <Route path="/">
+                            <Route index element={<Home />} />
+                            <Route path="/login" element={<LoginPage />} />
+                        </Route>
                     </Routes>
                 </React.Suspense>
             </DynamicLayout>

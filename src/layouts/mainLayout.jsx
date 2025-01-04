@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { UsersIcon, SmileIcon, CogIcon } from "lucide-react";
-import { HOST, headers } from "../config/config";
+import { HOST } from "../config/config";
 import axios from "axios";
 
 import ChannelSelection from "../components/channel-selection";
