@@ -68,7 +68,6 @@ export default function MainLayout({ children, select, channelType }) {
                         placeholder="Search Conversations"
                     />
                 </div>
-                d
                 {channelType === "private" && (
                     <>
                         {menu.map((item, index) => (

@@ -1,9 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation, useParams, createCookieSessionStorage } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation, useParams } from "react-router-dom";
 
 import MainLayout from "../layouts/mainLayout";
 
 const Home = React.lazy(() => import("../pages/home"));
+const LoadingPage = React.lazy(() => import("../pages/loading"));
 const LoginPage = React.lazy(() => import("../pages/auth/login"));
 
 function DynamicLayout({ children }) {
@@ -26,14 +27,14 @@ export default function App() {
     return (
         <Router>
             <DynamicLayout>
-                <React.Suspense allback={<div>Loading...</div>}>
-                    <Routes>
-                        <Route path="/">
+                <Routes>
+                    <Route path="/">
+                        <React.Suspense fallback={<div>Loading . . . </div>}>
                             <Route index element={<Home />} />
-                            <Route path="/login" element={<LoginPage />} />
-                        </Route>
-                    </Routes>
-                </React.Suspense>
+                        </React.Suspense>
+                        <Route path="/login" element={<LoginPage />} />
+                    </Route>
+                </Routes>
             </DynamicLayout>
         </Router>
     );
