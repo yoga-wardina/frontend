@@ -33,22 +33,26 @@ export default function LoginPage() {
     }
     return (
         <div
-            className="h-screen w-screen overflow-hidden flex justify-center items-center bg-blue-primary">
-            <div className="py-10 w-[90%] max-w-[480px] h-fit rounded-lg bg-dark-primary text-grey-primary">
-                <div className="w-full text-center">
-                    <h1 className="text-xl">Wellcome back!</h1>
-                    <h3 className="text-xs">We're excited to see you again!</h3>
-                </div>
-                <div className="flex px-10 flex-col gap-4 text-xs">
-                    {error && <div className="text-red-600">{error}</div>}
-                    <RequiredTextInput label="EMAIL" name="email"/>
-                    <RequiredTextInput label='PASSWORD' name='password' type={'password'}/>
-                    <a href="" className="text-blue-primary">Forgot your password?</a>
-                    <button onClick={submit} className="w-full rounded-sm text-white bg-blue-secondary px-4 py-2 bg-blue-primary">
-                        LOGIN
-                    </button>
-                </div>
-            </div>
+        className="h-screen w-screen overflow-hidden flex justify-center 
+        items-center bg-blue-primary">
+        <div className="py-10 w-[90%] max-w-[480px] h-fit rounded-lg 
+        bg-dark-primary text-grey-primary">
+        <div className="w-full text-center">
+        <p className="text-xl"> WAZZUP </p>
+        <h1 className="text-xl">Wellcome back!</h1>
+        <h3 className="text-xs">We're excited to see you again!</h3>
+        </div>
+        <div className="flex px-10 flex-col gap-4 text-xs">
+        {error && <div className="text-red-600">{error}</div>}
+        <RequiredTextInput label="EMAIL" name="email"/>
+        <RequiredTextInput label='PASSWORD' name='password' type={'password'}/>
+        <a href="" className="text-blue-primary">Forgot your password?</a>
+        <button onClick={submit} className="w-full rounded-sm text-white 
+        bg-blue-secondary px-4 py-2 bg-blue-primary">
+        LOGIN
+        </button>
+        </div>
+        </div>
         </div>
     );
 }
