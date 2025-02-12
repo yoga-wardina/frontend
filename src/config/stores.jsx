@@ -6,6 +6,8 @@ export const useStore = create(
     persist(
         (set) => ({
             isMobile: false,
+            selectedView: "channel",
+            setSelectedView: (value) => set({ selectedView: value }),
             setMobile: (value) => set({ isMobile: value }),
         }),
         {

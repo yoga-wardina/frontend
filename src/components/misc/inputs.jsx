@@ -4,7 +4,7 @@ import { useInputStore } from "../../config/stores";
 export const emailRgex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const passwordRgex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
-export const RequiredTextInput = ({ callBack, label, name, error, type }) => {
+export const RequiredTextInput = ({ label, name, error, type }) => {
     const { inputs, setInput } = useInputStore();
     return (
         <div className=" flex flex-col gap-1 w-full">

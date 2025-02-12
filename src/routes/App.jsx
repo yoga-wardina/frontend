@@ -30,7 +30,11 @@ function DynamicLayout({ children }) {
         if (location.pathname.startsWith("/group") && groupId) {
             channelType = "group";
         }
-        return <MainLayout channelType={channelType}>{children}</MainLayout>;
+        return (
+            <MainLayout channelType={channelType}>
+                {children}
+            </MainLayout>
+        );
     }
     return <>{children}</>;
 }
