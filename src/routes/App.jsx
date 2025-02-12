@@ -8,6 +8,7 @@ import LoadingPage from "../pages/loading";
 const Home = React.lazy(() => import("../pages/home"));
 
 const LoginPage = React.lazy(() => import("../pages/auth/login"));
+const ReggisterPage = React.lazy(() => import("../pages/auth/register"));
 
 function DynamicLayout({ children }) {
     const location = useLocation();
@@ -58,6 +59,7 @@ export default function App() {
                         <Route path="/">
                             <Route index element={<Home />} />
                             <Route path="/login" element={<LoginPage />} />
+                            <Route path="/register" element={<ReggisterPage />} />
                         </Route>
                         <Route path="/channel/:groupId" element={<Home />} />
                     </Routes>

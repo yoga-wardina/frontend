@@ -2,6 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+/* For WebKit-based browsers (Chrome, Safari, Edge) */
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 100, 100, 0.5);
+    /* Color of the thumb */
+    border-radius: 1px;
+    /* Rounded edges */
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    /* Background of the scrollbar track */
+}
+
+/* For Firefox */
+* {
+    scrollbar-width: thin;
+    /* "thin" for a smaller scrollbar */
+    scrollbar-color: rgba(99, 100, 100, 0.5) transparent;
+    /* Thumb color & track */
+}
+
+::-webkit-scrollbar {
+    width: 1px;
+    /* Width of the scrollbar */
+
+}
+
 html {
     --jet: #313338;
     --NavJet: #2b2d31;
