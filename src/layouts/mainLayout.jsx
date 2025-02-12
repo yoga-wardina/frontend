@@ -55,7 +55,7 @@ export default function MainLayout({ children, select, channelType }) {
     );
 
     return (
-        <div>
+        <div className="overflow-hidden w-full h-full">
             <div className="group-selector"></div>
             <div className="channel-selector px-2">
                 <div className="w-full flex items-center h-12 border-b border-gray-800">
@@ -100,7 +100,7 @@ export default function MainLayout({ children, select, channelType }) {
                 <button onClick={() => setShowInfo(!showInfo)}>{showInfo ? "Hide" : "Show"}</button>
             </div>
             {showInfo && <div className="channel-info">cock</div>}
-            <div className={`content p-1 px-4 ${showInfo ? "colapse" : ""}`}>{children}</div>
+            <div className={`content overflow-y-auto overflow-x-hidden p-1 px-4 ${showInfo ? "colapse" : ""}`}>{children}</div>
         </div>
     );
 }

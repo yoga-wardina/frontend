@@ -1,40 +1,73 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation, useParams } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation, useParams, useNavigate } from "react-router-dom";
+import { useStore, useAuthStore } from "../config/stores";
 
-import MainLayout from "../layouts/mainLayout";
+import MainLayout from "../layouts/mobile/main-layout";
+import LoadingPage from "../pages/loading";
 
 const Home = React.lazy(() => import("../pages/home"));
-const LoadingPage = React.lazy(() => import("../pages/loading"));
+
 const LoginPage = React.lazy(() => import("../pages/auth/login"));
+const ReggisterPage = React.lazy(() => import("../pages/auth/register"));
 
 function DynamicLayout({ children }) {
     const location = useLocation();
     const { groupId } = useParams();
+    const navigate = useNavigate();
+    const { isAuthenticated } = useAuthStore();
 
-    if (location.pathname.startsWith("/login") || location.pathname.startsWith("/register")) {
-        return <>{children}</>;
-    }
-    // Determine channelType based on the route
-    let channelType = "private"; // Default channelType
-    if (location.pathname.startsWith("/group") && groupId) {
-        channelType = "group";
-    }
+    React.useEffect(() => {
+        if (location.pathname.startsWith("/channel")) {
+            if (!isAuthenticated) {
+                window.location.href = "/login";
+                return null;
+            }
+        }
+    }, [location.pathname]);
 
-    return <MainLayout channelType={channelType}>{children}</MainLayout>;
+    if (location.pathname.startsWith("/channel")) {
+        let channelType = "private";
+        if (location.pathname.startsWith("/group") && groupId) {
+            channelType = "group";
+        }
+        return (
+            <MainLayout channelType={channelType}>
+                {children}
+            </MainLayout>
+        );
+    }
+    return <>{children}</>;
 }
-function PrivateRouter() {}
+
+const ResponsiveLayout = ({ children }) => {
+    const { isMobile, setMobile } = useStore();
+
+    React.useEffect(() => {
+        if (window.innerWidth <= 600) {
+            setMobile(true);
+        } else {
+            setMobile(false);
+        }
+    });
+    if (isMobile) {
+        return;
+    }
+};
+
 export default function App() {
     return (
         <Router>
             <DynamicLayout>
-                <Routes>
-                    <Route path="/">
-                        <React.Suspense fallback={<div>Loading . . . </div>}>
+                <React.Suspense fallback={<LoadingPage />}>
+                    <Routes>
+                        <Route path="/">
                             <Route index element={<Home />} />
-                        </React.Suspense>
-                        <Route path="/login" element={<LoginPage />} />
-                    </Route>
-                </Routes>
+                            <Route path="/login" element={<LoginPage />} />
+                            <Route path="/register" element={<ReggisterPage />} />
+                        </Route>
+                        <Route path="/channel/:groupId" element={<Home />} />
+                    </Routes>
+                </React.Suspense>
             </DynamicLayout>
         </Router>
     );

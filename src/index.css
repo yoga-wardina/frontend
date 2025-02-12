@@ -1,6 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* For WebKit-based browsers (Chrome, Safari, Edge) */
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 100, 100, 0.5);
+    /* Color of the thumb */
+    border-radius: 1px;
+    /* Rounded edges */
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    /* Background of the scrollbar track */
+}
+
+/* For Firefox */
+* {
+    scrollbar-width: thin;
+    /* "thin" for a smaller scrollbar */
+    scrollbar-color: rgba(99, 100, 100, 0.5) transparent;
+    /* Thumb color & track */
+}
+
+::-webkit-scrollbar {
+    width: 1px;
+    /* Width of the scrollbar */
+
+}
+
 html {
     --jet: #313338;
     --NavJet: #2b2d31;
@@ -15,12 +44,33 @@ html {
     --content-width: calc(100vw - 312px);
 }
 
+input:-webkit-autofill {
+    background-color: #1E1F22 !important;
+    /* Change to your desired color */
+    color: #B5BAC1 !important;
+    /* Ensure text color is readable */
+}
+
+input:-webkit-autofill:focus {
+    background-color: #1E1F22 !important;
+    /* Change to your desired color */
+    color: #B5BAC1 !important;
+    /* Ensure text color is readable */
+}
+
+input[type='text']:focus {
+    outline-width: 0px;
+    border: none;
+    box-shadow: 0px;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
 }
 
 #app {
