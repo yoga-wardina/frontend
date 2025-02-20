@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useStore } from "../../config/stores";
 
 export const ChatComponent = () => {};
-export const ChannelSelection = ({ children, trigger }) => {
+export const ServerSelecion = ({ children, trigger, }) => {
     return (
-        <section className={`w-full h-screen overflow-x-hidden bg-dark-3 ${trigger === "channel" ? "block" : "hidden"}`}>
+        <aside className={`w-full h-screen overflow-x-hidden bg-dark-3 ${trigger === "channel" ? "block" : "hidden"}`}>
             <div className="relative h-screen w-full">
                 <menu className="py-3 flex items-center absolute top-0 left-0 flex-col gap-2 bg-dark-3 w-20 h-[calc(100vh-72px)]">
                     <li className="w-full h-fit flex justify-center">
@@ -34,10 +34,22 @@ export const ChannelSelection = ({ children, trigger }) => {
                 </section>
                 <nav className="flex absolute bottom-0 left-0 w-full h-[72px] bg-dark-primary"></nav>
             </div>
-        </section>
+        </aside>
     );
 };
 export const DetailConmponent = () => {};
+export const ChatSelector = () => {
+   return(
+    <div className="w-full py-2 pt-3 px-5 h-[calc(100vh-82px)]">
+        <search>
+            <h1 className="text-white font-bold">Messages</h1>
+        </search>
+    </div>
+   ) 
+};
+export const ChannelSelector = () => {
+    
+};
 
 export default function MainLayout({ children, channelType, route }) {
     const { selectedView, setSelectedView } = useStore();
@@ -46,7 +58,7 @@ export default function MainLayout({ children, channelType, route }) {
     }, [selectedView]);
     React.useEffect(() => {
         setSelectedView("channel");
-    }, []);
+    }, [setSelectedView]);
     const transitions = {
         chat: { left: "detail", right: "channel" },
         channel: { left: "chat" },
@@ -60,15 +72,14 @@ export default function MainLayout({ children, channelType, route }) {
     const [startX, setStartX] = useState(0);
     const [isSwiped, setIsSwiped] = useState(false);
 
-    const threshold = 200; // Minimum distance for a swipe
+    const threshold = 200; 
 
-    // Start Swipe (Touch & Mouse)
     const handleStart = (clientX) => {
         setStartX(clientX);
         setIsSwiped(false);
     };
 
-    // Move Detection (Touch & Mouse)
+    
     const handleMove = (clientX) => {
         if (isSwiped) return;
 
@@ -80,12 +91,6 @@ export default function MainLayout({ children, channelType, route }) {
         }
     };
 
-    // Mouse Events
-    //const handleMouseDown = (e) => handleStart(e.clientX);
-    //const handleMouseMove = (e) => handleMove(e.clientX);
-    //const handleMouseUp = () => setIsSwiped(false);
-
-    // Touch Events
     const handleTouchStart = (e) => handleStart(e.touches[0].clientX);
     const handleTouchMove = (e) => handleMove(e.touches[0].clientX);
     const handleTouchEnd = () => setIsSwiped(false);
@@ -93,7 +98,9 @@ export default function MainLayout({ children, channelType, route }) {
     return (
         <div onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd} className="w-screen h-screen">
             <nav className=""></nav>
-            <ChannelSelection trigger={selectedView}></ChannelSelection>
+            <ServerSelecion trigger={selectedView}>
+                <ChatSelector/>
+            </ServerSelecion >
             <section
                 className={`bg-dark-primary w-full h-svh overflow-y-auto overflow-x-hidden p-6 ${
                     selectedView === "chat" ? "block" : "hidden"

@@ -24,7 +24,7 @@ function DynamicLayout({ children }) {
             }
         }
     }, [location.pathname]);
-
+ 
     if (location.pathname.startsWith("/channel")) {
         let channelType = "private";
         if (location.pathname.startsWith("/group") && groupId) {
